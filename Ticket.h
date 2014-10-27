@@ -10,11 +10,8 @@ namespace Bus_ticket {
 
     class Ticket {
         private:
-            static int sold;
-            static int alive;
-            int id;
-            int discount;
-            int quantity;
+            class Implementation;
+            Implementation *impl;
         public:
             Ticket(const int discount = 0);
             ~Ticket();

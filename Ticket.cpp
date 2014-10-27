@@ -12,20 +12,33 @@ using namespace std;
 
 namespace Bus_ticket {
 
-	Ticket::Ticket (const int discount){
+	class Ticket::Implementation{
+		private:
+            static int sold;
+            static int alive;
+            int id;
+            int discount;
+            int quantity;
+            friend class Ticket;
+	};
+
+	Ticket::Ticket (const int discount)
+		: impl(new Implementation())
+	{
 		#ifdef DEBUG
 			clog << DEBUG_PREFIX "Constructor called!" << endl;
 		#endif
 		set_discount(discount);
-		id = ++sold;
-		alive++;
-		assert(this->id >= 0);
+		impl->id = ++(impl->sold);
+		impl->alive++;
+		assert(impl->id >= 0);
 	}
 	Ticket::~Ticket (){
 		#ifdef DEBUG
 			clog << DEBUG_PREFIX "Destructor called!" << endl;
 		#endif
-		alive--;
+		impl->alive--;
+		delete impl;
 	}
 
 	void Ticket::set_discount (const int &d){
@@ -33,7 +46,7 @@ namespace Bus_ticket {
 			clog << DEBUG_PREFIX "set_discount(" << d << ") called!" << endl;
 		#endif
 		if (d >= 0){
-			this->discount = d;	
+			impl->discount = d;	
 		} else {
 			#ifdef DEBUG
 				clog << DEBUG_PREFIX "invalid argument " << endl;
@@ -49,7 +62,7 @@ namespace Bus_ticket {
 			clog << DEBUG_PREFIX "set_quantity(" << quantity << ") called!" << endl;
 		#endif
 		if (quantity > 0){
-			this->quantity = quantity;
+			impl->quantity = quantity;
 		} else {
 			#ifdef DEBUG
 				clog << DEBUG_PREFIX "Quantity must be positive" << endl;
@@ -64,7 +77,7 @@ namespace Bus_ticket {
 		#endif
 		
 		this->set_quantity(this->get_quantity() + 1);
-		alive++;
+		impl->alive++;
 		
 		#ifdef DEBUG
 			clog << DEBUG_PREFIX << this->to_string() << endl;
@@ -80,7 +93,7 @@ namespace Bus_ticket {
 		
 		Ticket temp = *this;
 		this->set_quantity(this->get_quantity() + 1);
-		alive++;
+		impl->alive++;
 		
 		#ifdef DEBUG
 			clog << DEBUG_PREFIX << this->to_string() << endl;
@@ -95,7 +108,7 @@ namespace Bus_ticket {
 		#endif
 		
 		this->set_quantity(this->get_quantity() + number);
-		alive++;
+		impl->alive++;
 		
 		#ifdef DEBUG
 			clog << DEBUG_PREFIX << this->to_string() << endl;
@@ -118,28 +131,28 @@ namespace Bus_ticket {
 
 
 	int Ticket::total_count (){
-		return sold;
+		return Implementation::sold;
 	}
 
 	int Ticket::total_alive (){
-		return alive;
+		return Implementation::alive;
 	}
 
 	int Ticket::get_discount (){
-		return discount;
+		return impl->discount;
 	}
 
 	int Ticket::get_id (){
-		return id;
+		return impl->id;
 	}
 
 	int Ticket::get_quantity (){
-		return quantity;
+		return impl->quantity;
 	}
 
 	string Ticket::to_string (){
 		stringstream ss;
-		ss << sold << " " << id << " " << discount << " " << alive;
+		ss << impl->sold << " " << impl->id << " " << impl->discount << " " << impl->alive;
 		return ss.str();
 	}
 
@@ -167,7 +180,7 @@ namespace Bus_ticket {
 	}
 
 
-	int Ticket::alive = 0;
-	int Ticket::sold = 0;
+	int Ticket::Implementation::alive = 0;
+	int Ticket::Implementation::sold = 0;
 
 }
