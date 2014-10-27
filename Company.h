@@ -10,7 +10,8 @@ namespace Bus_ticket {
 
 	class Company {
 	    private:
-	        string name;
+	    	class Implementation;
+	    	Implementation *impl;
 	    public:
 	        Company(const string &name);
 	        ~Company();

@@ -11,34 +11,43 @@ using namespace std;
 
 namespace Bus_ticket {
 
-	Company::Company (const string &name){
+	class Company::Implementation{
+		private:
+			string name;
+			friend class Company;
+	};
+
+	Company::Company (const string &name)
+		: impl(new Implementation())
+	{
 		#ifdef DEBUG
 			clog << DEBUG_PREFIX "Constructor called!" << endl;
 		#endif
 		set_name(name);
-		assert(this->name.length());
+		assert(impl->name.length());
 	}
 
 	Company::~Company (){
 		#ifdef DEBUG
 			clog << DEBUG_PREFIX "Destructor called!" << endl;
 		#endif
+		delete impl;
 	}
 
 	void Company::set_name (const string &name){
 		#ifdef DEBUG
 			clog << DEBUG_PREFIX "set_name(" << name << ") called!" << endl;
 		#endif
-		this->name = name;
+		impl->name = name;
 	}
 
 	string Company::get_name (){
-		return name;
+		return impl->name;
 	}
 
 	string Company::to_string (){
 		stringstream ss;
-		ss << name << endl;
+		ss << impl->name << endl;
 		return ss.str();
 	}
 
