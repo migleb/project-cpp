@@ -10,22 +10,8 @@ namespace Bus_ticket {
 
     class Buyer {
         private:
-            /**
-            *
-            * Name : name
-            *
-            * Private buyer name as string
-            *
-            */
-            string name;
-            /**
-            *
-            * Name : surname
-            *
-            * Private buyer surname as string
-            *
-            */
-            string surname;
+            class Implementation;
+            Implementation *impl;
         public:
             /**
             *
@@ -50,19 +36,6 @@ namespace Bus_ticket {
             *
             */
             Buyer (const string &name, const string &surname);
-        private:
-            /**
-            *
-            * Name : init
-            *
-            * Private void method for initializing buyer
-            *
-            * @param name - reference to passed name (string)
-            * @param surname - reference to passed surname (string) 
-            *
-            */
-            void init (const string &name, const string &surname = "");
-        public:
             /**
             *
             * Name : ~Buyer
