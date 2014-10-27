@@ -11,7 +11,15 @@ using namespace std;
 
 namespace Bus_ticket {
 
-	Bus::Bus (const int &seats){
+	class Bus::Implementation{
+		private:
+			int seats;
+			friend class Bus;
+	};
+
+	Bus::Bus (const int &seats)
+		: impl(new Implementation())
+	{
 		#ifdef DEBUG
 			clog << DEBUG_PREFIX "Constructor called!" << endl;
 		#endif
@@ -22,6 +30,7 @@ namespace Bus_ticket {
 		#ifdef DEBUG
 			clog << DEBUG_PREFIX "Destructor called!" << endl;
 		#endif
+		delete impl;
 	}
 
 	void Bus::set_seats (const int &seats){
@@ -29,7 +38,7 @@ namespace Bus_ticket {
 			clog << DEBUG_PREFIX "set_seats(" << seats << ") called!" << endl;
 		#endif
 		if (seats > 0) {
-			this->seats = seats;
+			impl->seats = seats;
 		} else {
 			#ifdef DEBUG
 				clog << DEBUG_PREFIX "invalid argument: " << seats << endl;
@@ -39,12 +48,12 @@ namespace Bus_ticket {
 	}
 
 	int Bus::get_seats (){
-		return seats;
+		return impl->seats;
 	}
 
 	string Bus::to_string (){
 		stringstream ss;
-		ss << seats << endl;
+		ss << impl->seats << endl;
 		return ss.str();
 	}
 

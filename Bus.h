@@ -11,7 +11,8 @@ namespace Bus_ticket {
 
     class Bus {
         private:
-            int seats;
+            class Implementation;
+            Implementation *impl;
         public:
             Bus(const int &seats);
             ~Bus();
