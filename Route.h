@@ -10,14 +10,8 @@ namespace Bus_ticket {
 
     class Route {
         private:
-            int hour_departure;
-            int minute_departure;
-            int hour_arrival;
-            int minute_arrival;
-            string city_departure;
-            string city_arrival;
-            int tickets;
-            double price;
+            class Implementation;
+            Implementation *impl;
         public:
             Route(const int &hour_departure, const int &minute_departure, const int &hour_arrival, const int &minute_arrival, const string &city_departure,
                   const string &city_arrival, const double &price);

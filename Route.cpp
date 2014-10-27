@@ -12,12 +12,27 @@ using namespace std;
 
 namespace Bus_ticket {
 
+	class Route::Implementation{
+		private:
+            int hour_departure;
+            int minute_departure;
+            int hour_arrival;
+            int minute_arrival;
+            string city_departure;
+            string city_arrival;
+            int tickets;
+            double price;
+            friend class Route;
+	};
+
 	Route::Route (const int &hour_departure, const int &minute_departure, const int &hour_arrival, const int &minute_arrival, const string &city_departure,
-		  const string &city_arrival, const double &price){
+		  const string &city_arrival, const double &price)
+		: impl(new Implementation())
+	{
 		#ifdef DEBUG
 			clog << DEBUG_PREFIX "Constructor called!" << endl;
 		#endif
-		tickets = 0;
+		impl->tickets = 0;
 		set_deptime (hour_departure,minute_departure);
 		set_arrtime (hour_arrival,minute_arrival);
 		set_route(city_departure,city_arrival);
@@ -28,6 +43,7 @@ namespace Bus_ticket {
 		#ifdef DEBUG
 			clog << DEBUG_PREFIX "Destructor called!" << endl;
 		#endif
+		delete impl;
 	}
 
 	void Route::set_deptime (const int &hour, const int &minute){
@@ -35,8 +51,8 @@ namespace Bus_ticket {
 			clog << DEBUG_PREFIX "set_deptime(" << hour << ", " << minute << ") called!" << endl;
 		#endif
 		if ((hour <= 24) && (hour >= 0) && (minute < 60) && (minute >= 0)){
-			hour_departure = hour;
-			minute_departure = minute;
+			impl->hour_departure = hour;
+			impl->minute_departure = minute;
 		} else {
 			if ((hour > 24) || (hour < 0)){
 				#ifdef DEBUG
@@ -57,8 +73,8 @@ namespace Bus_ticket {
 			clog << DEBUG_PREFIX "set_arrtime(" << hour << ", " << minute << ") called!" << endl;
 		#endif
 		if ((hour <= 24) && (hour >= 0) && (minute < 60) && (minute >= 0)){
-			hour_arrival = hour;
-			minute_arrival = minute;
+			impl->hour_arrival = hour;
+			impl->minute_arrival = minute;
 		}
 	}
 
@@ -66,8 +82,8 @@ namespace Bus_ticket {
 		#ifdef DEBUG
 			clog << DEBUG_PREFIX "set_route(" << start << ", " << finish << ") called!" << endl;
 		#endif
-		city_departure = start;
-		city_arrival = finish;
+		impl->city_departure = start;
+		impl->city_arrival = finish;
 	}
 
 	void Route::set_price (const double &price){
@@ -75,7 +91,7 @@ namespace Bus_ticket {
 			clog << DEBUG_PREFIX "set_price(" << price << ") called!" << endl;
 		#endif
 		if (price > 0){
-			this->price = price;
+			impl->price = price;
 		} else {
 			#ifdef DEBUG
 				clog << DEBUG_PREFIX "invalid argument: " << price << endl;
@@ -86,36 +102,36 @@ namespace Bus_ticket {
 
 	string Route::get_deptime (){
 		stringstream time;
-		time << hour_departure << ":" << minute_departure;
+		time << impl->hour_departure << ":" << impl->minute_departure;
 		return time.str();
 	}
 
 	string Route::get_arrtime (){
 		stringstream time;
-		time << hour_arrival << ":" << minute_arrival;
+		time << impl->hour_arrival << ":" << impl->minute_arrival;
 		return time.str();
 	}
 
 	string Route::get_depcity (){
-		return city_departure;
+		return impl->city_departure;
 	}
 
 	string Route::get_arrcity (){
-		return city_arrival;
+		return impl->city_arrival;
 	}
 
 	int Route::get_tickets (){
-		return tickets;
+		return impl->tickets;
 	}
 
 	double Route::get_price (){
-		return price;
+		return impl->price;
 	}
 
 	string Route::to_string (){
 		stringstream ss;
-		ss << hour_departure << " " << minute_departure << " " << hour_arrival << " " << minute_arrival << " " <<
-		city_departure << " " << city_arrival << " " << price << endl;
+		ss << impl->hour_departure << " " << impl->minute_departure << " " << impl->hour_arrival << " " << impl->minute_arrival << " " <<
+		impl->city_departure << " " << impl->city_arrival << " " << impl->price << endl;
 		return ss.str();
 	}
 
