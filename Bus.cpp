@@ -2,6 +2,8 @@
 #define DEBUG_PREFIX "--> "
 
 #include "Bus.h"
+#include "Route.h"
+
 #include <sstream>
 #include <iostream>
 #include <stdexcept>
@@ -14,11 +16,20 @@ namespace Bus_ticket {
 	class Bus::Implementation{
 		private:
 			int seats;
+			Route route;
 			friend class Bus;
+		public:
+			Implementation(Route *r);
 	};
 
-	Bus::Bus (const int &seats)
-		: impl(new Implementation())
+	Bus::Implementation::Implementation (Route *r)
+		: route(*r)
+	{
+
+	}
+
+	Bus::Bus (const int &seats, Route *r)
+		: impl(new Implementation(r))
 	{
 		#ifdef DEBUG
 			clog << DEBUG_PREFIX "Constructor called!" << endl;

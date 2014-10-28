@@ -2,6 +2,7 @@
 #define BUS_H
 
 #include <string>
+#include "Route.h"
 
 #define string std::string
 #define ostream std::ostream
@@ -14,7 +15,7 @@ namespace Bus_ticket {
             class Implementation;
             Implementation *impl;
         public:
-            Bus(const int &seats);
+            Bus(const int &seats, Route *r);
             ~Bus();
             void set_seats (const int &_seats);
             int get_seats ();
