@@ -2,6 +2,8 @@
 #define DEBUG_PREFIX "--> "
 
 #include "Ticket.h"
+
+#include <vector>
 #include <sstream>
 #include <string>
 #include <iostream>
