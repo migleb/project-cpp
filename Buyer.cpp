@@ -17,8 +17,22 @@ namespace Bus_ticket {
 			string name;
 			string surname;
 			void init (const string &name, const string &surname = "");
+			Ticket* t;
 			friend class Buyer;
+		public:
+			Implementation();
+			~Implementation();
 	};
+
+	Buyer::Implementation::Implementation()
+		: surname("")
+	{
+		t = new Ticket();
+	}
+
+	Buyer::Implementation::~Implementation(){
+		delete t;
+	}
 
 	//initializing name and surname
 	void Buyer::Implementation::init (const string &name, const string &surname){
