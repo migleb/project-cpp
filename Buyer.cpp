@@ -2,11 +2,13 @@
 #define DEBUG_PREFIX "--> "
 
 #include "Buyer.h"
+
 #include <sstream>
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
 #include <cassert>
+#include <vector>
 
 using namespace std;
 
@@ -71,6 +73,22 @@ namespace Bus_ticket {
 		#endif
 		delete impl;
 	}
+
+	// copy constructor, assignment operator
+	Buyer::Buyer(const Buyer &other)
+		: impl(new Implementation(*(other.impl)))
+	{
+	}
+
+	Buyer& Buyer::operator=(const Buyer &other){
+		if (&other != this)
+		{
+			delete impl;
+		}
+		impl = new Implementation(*(other.impl));
+		return *this;
+	}
+
 
 	//setters
 	void Buyer::set_name (const string &name){

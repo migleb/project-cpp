@@ -56,6 +56,8 @@ namespace Bus_ticket {
             * @param name - reference to passed name (string)
             *
             */
+            Buyer(const Buyer &other);
+            Buyer& operator=(const Buyer &other);
             void set_name (const string &_name);
             /**
             *
