@@ -2,6 +2,10 @@
 #define TICKET_H
 
 #include <string>
+
+#include "Company.h"
+#include "Route.h"
+
 #define string std::string
 #define ostream std::ostream
 #define istream std::istream
@@ -15,6 +19,7 @@ namespace Bus_ticket {
         public:
             Ticket(const int discount = 0);
             ~Ticket();
+            string get_company_name();
             void set_discount(const int &d);
             void set_quantity (const int &quantity);
 

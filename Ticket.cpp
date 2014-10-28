@@ -8,6 +8,8 @@
 #include <cassert>
 #include <stdexcept>
 
+#define string std::string
+
 using namespace std;
 
 namespace Bus_ticket {
@@ -19,6 +21,7 @@ namespace Bus_ticket {
             int id;
             int discount;
             int quantity;
+            Company *company;
             friend class Ticket;
 	};
 
@@ -33,12 +36,17 @@ namespace Bus_ticket {
 		impl->alive++;
 		assert(impl->id >= 0);
 	}
+
 	Ticket::~Ticket (){
 		#ifdef DEBUG
 			clog << DEBUG_PREFIX "Destructor called!" << endl;
 		#endif
 		impl->alive--;
 		delete impl;
+	}
+
+	string Ticket::get_company_name(){
+		return impl->company->get_name();
 	}
 
 	void Ticket::set_discount (const int &d){
@@ -184,3 +192,5 @@ namespace Bus_ticket {
 	int Ticket::Implementation::sold = 0;
 
 }
+
+#undef string
