@@ -8,6 +8,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
