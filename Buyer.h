@@ -2,6 +2,9 @@
 #define BUYER_H
 
 #include <string>
+
+#include "Ticket.h"
+
 #define string std::string
 #define ostream std::ostream
 #define istream std::istream
@@ -93,7 +96,10 @@ namespace Bus_ticket {
             * \return string - buyer object
             *
             */
-            string to_string();
+           // string to_string();
+
+            template <typename T>
+            T to_string() const;
 
             /**
             *

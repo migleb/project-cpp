@@ -28,7 +28,7 @@ int main () {
         cout << "Enter buyer name:" << endl;
         cin >> _name;
         p[i] = new Buyer(_name);
-        print<Buyer>(*p[i]);
+    //    print<Buyer>(*p[i]);
     }
 
     Route* r = new Route(11,20,15,30,"Vilnius","Klaipeda",60.45);

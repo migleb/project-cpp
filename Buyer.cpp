@@ -82,14 +82,17 @@ namespace Bus_ticket {
 		return impl->surname;
 	}
 
-	string Buyer::to_string(){
+	template <typename T>
+	T Buyer::to_string() const{
 		stringstream ss;
-		ss << impl->name << " " << impl->surname << endl;
+		ss << impl->name << " " << impl->surname;
 		return ss.str();
 	}
 
+	template string Buyer::to_string() const;
+
 	ostream& operator<<(ostream &o, Buyer &buyer){
-		o << buyer.to_string() << endl;
+		o << buyer.to_string<string>() << endl;
 		return o;
 	}
 
