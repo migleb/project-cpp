@@ -2,7 +2,7 @@ CC = "C:\Program Files (x86)\CodeBlocks\MinGW\bin\g++"
 FLAGS = -Wall 
 
 
-all : build run #Buyer_test Company_test Bus_test Route_test Ticket_test exceptions run
+all : build run #Buyer_test Company_test Bus_test Route_test Ticket_test run exceptions
 
 
 
@@ -10,14 +10,14 @@ all : build run #Buyer_test Company_test Bus_test Route_test Ticket_test excepti
 
 rebuild: clean build
 
-build : main.exe #Buyer_test.exe Company_test.exe Bus_test.exe Route_test.exe Ticket_test.exe exceptions.exe
+build : main.exe #exceptions.exe #Buyer_test.exe Company_test.exe Bus_test.exe Route_test.exe Ticket_test.exe
 
 debug : FLAGS = -DDEBUG
 #debug : clean Buyer_test.exe Company_test.exe Bus_test.exe Route_test.exe Ticket_test.exe
 #	Buyer_test Company_test Bus_test Route_test Ticket_test
 
-main.exe : main.cpp Buyer.cpp Company.cpp Bus.cpp Route.cpp Ticket.cpp
-	$(CC) $(FLAGS) main.cpp Buyer.cpp Company.cpp Bus.cpp Route.cpp Ticket.cpp -o main.exe
+main.exe : main.cpp Buyer.cpp Company.cpp Bus.cpp Route.cpp Ticket.cpp Terminal.cpp
+	$(CC) $(FLAGS) main.cpp Buyer.cpp Company.cpp Bus.cpp Route.cpp Ticket.cpp Terminal.cpp -o main.exe
 
 Buyer_test.exe : Buyer_test.cpp Buyer.cpp
 	$(CC) $(FLAGS) Buyer_test.cpp Buyer.cpp -o Buyer_test.exe
