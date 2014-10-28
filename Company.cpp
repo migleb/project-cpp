@@ -2,6 +2,8 @@
 #define DEBUG_PREFIX "--> "
 
 #include "Company.h"
+
+#include <vector>
 #include <sstream>
 #include <iostream>
 #include <fstream>
@@ -14,6 +16,7 @@ namespace Bus_ticket {
 	class Company::Implementation{
 		private:
 			string name;
+			vector<Bus*> buses;
 			friend class Company;
 	};
 
@@ -32,6 +35,10 @@ namespace Bus_ticket {
 			clog << DEBUG_PREFIX "Destructor called!" << endl;
 		#endif
 		delete impl;
+	}
+
+	void Company::add_bus(Bus* bus){
+		impl->buses.push_back(bus);
 	}
 
 	void Company::set_name (const string &name){

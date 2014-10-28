@@ -2,6 +2,10 @@
 #define COMPANY_H
 
 #include <string>
+
+#include "Bus.h"
+#include "Route.h"
+
 #define string std::string
 #define ostream std::ostream
 #define istream std::istream
@@ -15,6 +19,7 @@ namespace Bus_ticket {
 	    public:
 	        Company(const string &name);
 	        ~Company();
+	        void add_bus(Bus* bus);
 	        void set_name (const string &_name);
 	        string get_name ();
 	        string to_string();
