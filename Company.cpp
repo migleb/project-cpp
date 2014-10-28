@@ -38,7 +38,7 @@ namespace Bus_ticket {
 	}
 
 	void Company::add_bus(Bus* bus){
-		impl->buses.push_back(bus);
+		this->impl->buses.push_back(bus);
 	}
 
 	void Company::set_name (const string &name){
